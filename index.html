@@ -220,14 +220,9 @@
                             <span class="carousel-control-next-icon"></span>
                             <span class="sr-only">Next</span>
                         </a>
-                        <div class="btn-group" id="carouselButton">
-                            <button class="btn btn-sm btn-danger" id="carouselPause">
+                            <button class="btn btn-sm btn-danger" id="carouselButton">
                                 <i class="fa fa-pause"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger active" id="carouselPlay">
-                                <i class="fa fa-play"></i>
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -321,16 +316,17 @@
         <script>
             $(function() {
                 $(".carousel").carousel({ interval: 2000 } );
-                $("#carouselPause").click(function(){
-                    $(".carousel").carousel("pause");
-                    $(this).addClass("active");
-                    $("#carouselPlay").removeClass("active");
+                $("#carouselButton").click(function(){
+                    if ($(this).children("i").hasClass("fa-pause")) {
+                        $(".carousel").carousel("pause");
+                        $("#carouselButton").children("i").removeClass("fa-pause");
+                        $("#carouselButton").children("i").addClass("fa-play");
+                    } else {
+                        $(".carousel").carousel("cycle");
+                        $("#carouselButton").children("i").removeClass("fa-play");
+                        $("#carouselButton").children("i").addClass("fa-pause");
+                    }
                 }) ;
-                $("#carouselPlay").click(function(){
-                    $(".carousel").carousel("cycle");
-                    $(this).addClass("active");
-                    $("#carouselPause").removeClass("active");
-                })
             });
         </script>
     </body>
